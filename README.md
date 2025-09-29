@@ -1,7 +1,5 @@
 # Instalador Whaticket SaaS
 
-Use esse instalador se o repositório do Whaticket estiver público.
-
 ```bash
 sudo apt -y update && apt -y upgrade
 ```
