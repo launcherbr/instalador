@@ -44,8 +44,18 @@ system_git_clone() {
 
   sleep 2
 
-  sudo su - deploy <<EOF
-  git clone ${link_git} /home/deploy/${instancia_add}/
+  # Solicita username e token
+  read -p "Digite seu GitHub username: " github_username
+  read -s -p "Digite seu GitHub token: " github_token
+  echo ""
+
+  # Constrói link com autenticação
+  if [[ $link_git == *"github.com"* ]]; then
+    repo_url=$(echo "$link_git" | sed -E "s#https://#https://${github_username}:${github_token}@#")
+    sudo -u deploy git clone "$repo_url" /home/deploy/${instancia_add}/
+  else
+    sudo -u deploy git clone "$link_git" /home/deploy/${instancia_add}/
+  fi
 
   # Permissões
   sudo chown -R deploy:deploy /home/deploy/${instancia_add}
