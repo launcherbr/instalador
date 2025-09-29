@@ -321,7 +321,7 @@ system_node_install() {
   sh -c '. /etc/os-release && echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt \$VERSION_CODENAME-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
   sudo apt update
-  sudo apt -y install postgresql
+  sudo apt -y install postgresql-16
   sudo timedatectl set-timezone America/Sao_Paulo
   
 EOF
