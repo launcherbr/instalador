@@ -15,8 +15,8 @@ backend_redis_create() {
 
   sudo su - root <<EOF
   usermod -aG docker deploy
-  docker run --name redis-${instancia_add} -p ${redis_port}:6379 -e TZ="America/Sao_Paulo" --restart always -d redis:latest redis-server --appendonly yes --appendfsync everysec --no-appendfsync-on-rewrite yes --maxmemory 2gb --maxmemory-policy noeviction --lazyfree-lazy-eviction yes --lazyfree-lazy-expire yes --lazyfree-lazy-server-del yes --save "900 1" --save "3600 1000" --requirepass "${mysql_root_password}"
-  
+  docker run --name redis-${instancia_add} -p ${redis_port}:6379 -e TZ="America/Sao_Paulo" --restart always --detach redis redis-server --requirepass ${mysql_root_password}
+    
   sleep 2
   sudo su - postgres
   createdb ${instancia_add};
